@@ -13,14 +13,13 @@
 UENUM(BlueprintType)
 enum class EBtnType : uint8
 {
-	None,
+	GameBtn = 0,
 	MenuBtn1 = 1,
 	MenuBtn2 = 2,
 	MenuBtn3 = 3,
 	MenuBtn4 = 4,
-	GameBtn,
-	ListBtn1,
-	ListBtn2,
+	ListBtn1 = 5,
+	ListBtn2 = 6,
 };
 
 
