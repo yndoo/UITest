@@ -4,14 +4,12 @@
 #include "TitleLevelUserWidget.h"
 
 
-int UTitleLevelUserWidget::MyText()
+int UTitleLevelUserWidget::MyBtnHover()
 {
-	if (true == IsHoverOnOff)
-	{
-		return static_cast<int>(HoverBtnType);
-	}
-	else
-	{
-		return static_cast<int>(UnHoverBtnType);
-	}
+	return static_cast<int>(HoverBtnType);
+}
+
+int UTitleLevelUserWidget::MyBtnUnhover()
+{
+	return static_cast<int>(UnHoverBtnType);
 }

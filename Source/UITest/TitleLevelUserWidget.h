@@ -16,15 +16,18 @@ class UITEST_API UTitleLevelUserWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category="MyBtnEvent")
-	int MyText();
+	UFUNCTION(BlueprintCallable, Category = "MyBtnEvent")
+	int MyBtnHover();
+	UFUNCTION(BlueprintCallable, Category = "MyBtnEvent")
+	int MyBtnUnhover();
+
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool IsHoverOnOff;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	EHoverBtn HoverBtnType;
+	EBtnType HoverBtnType;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	EUnHoverBtn UnHoverBtnType;
+	EBtnType UnHoverBtnType;
 };
