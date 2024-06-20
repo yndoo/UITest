@@ -14,4 +14,9 @@ class UITEST_API ATestGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	ATestGameMode();
+
+	UFUNCTION(BlueprintCallable)
+	void Test();
 };
