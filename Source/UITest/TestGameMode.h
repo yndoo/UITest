@@ -18,5 +18,5 @@ public:
 	ATestGameMode();
 
 	UFUNCTION(BlueprintCallable)
-	void Test();
+	void ListenServerOn();
 };
