@@ -12,9 +12,9 @@ ATestGameMode::ATestGameMode()
 void ATestGameMode::ListenServerOn()
 {
 	UGlobalGameInstance* Inst = GetWorld()->GetGameInstanceChecked<UGlobalGameInstance>();
-	if (nullptr != Inst && true == Inst->MyTestGameInfo.IsServer)
+	if (nullptr != Inst && true == Inst->CurNetInfo.GetIsServer())
 	{
-		FString& Port = Inst->MyTestGameInfo.PORT;
+		FString Port = Inst->CurNetInfo.GetPORT();
 		int PortNumber = FCString::Atoi(*Port);
 		if (PortNumber == 0)
 		{

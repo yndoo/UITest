@@ -24,8 +24,8 @@ void UTitleLevelUserWidget::ServerStart()
 		return;
 	}
 
-	Inst->MyTestGameInfo.IsServer = true;
-	Inst->MyTestGameInfo.PORT = Port;
+	Inst->CurNetInfo.SetIsServer(true);
+	Inst->CurNetInfo.SetPORT(Port);
 
 	//int PortNumber = FCString::Atoi(*Port);
 	//Inst->EnableListenServer(true, PortNumber);
@@ -42,8 +42,13 @@ void UTitleLevelUserWidget::Connect(FString _IP)
 		return;
 	}
 
-	Inst->MyTestGameInfo.IP = _IP;
-	Inst->MyTestGameInfo.PORT = Port;
+	if (false == _IP.IsEmpty())
+	{
+		IPAddress = _IP;
+	}
+
+	Inst->CurNetInfo.SetIP(IPAddress);
+	Inst->CurNetInfo.SetPORT(Port);
 
 	FString ConnectLevelName = FString::Printf(TEXT("%s:%s"), *IPAddress, *Port);
 	UGameplayStatics::OpenLevel(GetWorld(), *ConnectLevelName);
@@ -57,3 +62,20 @@ bool UTitleLevelUserWidget::Initialize()
 
 	return ReturnValue;
 }
+
+void UTitleLevelUserWidget::ServerTest(FName _IPName)
+{
+	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
+	if (true == _IPName.IsNone())
+	{
+		_IPName = FName("LocalNet");
+	}
+	Test = Inst->GetNetData(_IPName);
+	IPAddress = Test->GetIP();
+	/*FNetDataRow Data = Inst->GetNetDataValue(_IPName);
+
+	IPAddress = Data.GetIP();*/
+	Inst->CurNetInfo.SetIP(IPAddress);
+	Inst->CurNetInfo.SetPORT(Port);
+}
+

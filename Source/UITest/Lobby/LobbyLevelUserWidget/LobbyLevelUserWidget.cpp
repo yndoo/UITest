@@ -7,8 +7,14 @@
 void ULobbyLevelUserWidget::TravelToNext()
 {
 	UGlobalGameInstance* Inst = GetWorld()->GetGameInstanceChecked<UGlobalGameInstance>();
-	if (nullptr != Inst && true == Inst->MyTestGameInfo.IsServer)
+	if (nullptr != Inst && true == Inst->CurNetInfo.GetIsServer())
 	{
 		GetWorld()->ServerTravel("/Game/PlayLevel/PlayLevel");
 	}
+}
+
+bool ULobbyLevelUserWidget::IsServer()
+{
+	UGlobalGameInstance* Inst = GetWorld()->GetGameInstanceChecked<UGlobalGameInstance>();
+	return Inst->CurNetInfo.GetIsServer();
 }

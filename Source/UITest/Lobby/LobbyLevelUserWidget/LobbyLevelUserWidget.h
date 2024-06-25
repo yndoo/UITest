@@ -17,4 +17,7 @@ class UITEST_API ULobbyLevelUserWidget : public UUserWidget
 public:
 	UFUNCTION(BlueprintCallable)
 	void TravelToNext();
+
+	UFUNCTION(BlueprintCallable)
+	bool IsServer();
 };

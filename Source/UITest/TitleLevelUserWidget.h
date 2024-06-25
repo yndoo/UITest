@@ -10,6 +10,7 @@
 /**
  * 
  */
+struct FNetDataRow;
 UCLASS()
 class UITEST_API UTitleLevelUserWidget : public UUserWidget
 {
@@ -25,6 +26,8 @@ public:
 	void ServerStart();
 	UFUNCTION(BlueprintCallable)
 	void Connect(FString _IP);
+	UFUNCTION(BlueprintCallable)
+	void ServerTest(FName _IPName); // 나중에 방식 바꿀거임
 	virtual bool Initialize() override;
 
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
@@ -41,4 +44,5 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	EBtnType UnHoverBtnType;
 
+	const FNetDataRow* Test;
 };

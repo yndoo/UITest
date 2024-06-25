@@ -7,3 +7,21 @@ UGlobalGameInstance::UGlobalGameInstance()
 {
 
 }
+
+const FNetDataRow* UGlobalGameInstance::GetNetData(FName _Name)
+{
+	if (nullptr == NetDataTable)
+	{
+		UE_LOG(LogTemp, Fatal, TEXT("%S(%u)> if (nullptr == NetDataTable)"), __FUNCTION__, __LINE__);
+	}
+
+	FNetDataRow* Data = NetDataTable->FindRow<FNetDataRow>(_Name, nullptr);
+
+	if (nullptr == Data)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%S(%u)> %s Name Data Is Nullptr"), __FUNCTION__, __LINE__, *_Name.ToString());
+		return nullptr;
+	}
+
+	return Data;
+}

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
-#include "../TestGameInfo.h"
+#include "../NetDataRow.h"
 #include "GlobalGameInstance.generated.h"
 
 /**
@@ -16,8 +16,11 @@ class UITEST_API UGlobalGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public:
-	FTestGameInfo MyTestGameInfo;
-
+	const struct FNetDataRow* GetNetData(FName _Name);
+	FNetDataRow CurNetInfo;
 private:
 	UGlobalGameInstance();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowprivateAccess = "true"));
+	UDataTable* NetDataTable = nullptr;
 };
