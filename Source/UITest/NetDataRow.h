@@ -16,6 +16,10 @@ struct FNetDataRow : public FTableRowBase
 	GENERATED_BODY()
 	
 public:
+	inline FString GetName() const
+	{
+		return Name;
+	}
 	inline FString GetIP() const
 	{
 		return IP;
@@ -27,6 +31,11 @@ public:
 	inline bool GetIsServer() const
 	{
 		return IsServer;
+	}
+
+	void SetName(FString _Name)
+	{
+		Name = _Name;
 	}
 
 	void SetIP(FString _IP)
@@ -45,6 +54,9 @@ public:
 	}
 
 private:
+	UPROPERTY(Category = "Parameter", EditAnywhere, BlueprintReadWrite, meta = (AllowprivateAccess = "true"))
+	FString Name = "";
+
 	UPROPERTY(Category = "Parameter", EditAnywhere, BlueprintReadWrite, meta = (AllowprivateAccess = "true"))
 	FString IP = "127.0.0.1";
 
