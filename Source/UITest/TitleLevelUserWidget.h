@@ -35,6 +35,10 @@ public:
 	void RoomIPDataInit(UDataTable* _IPData, UComboBoxString* _Combo);
 	UFUNCTION(BlueprintCallable)
 	void RoomIPSelectChange(FString _Text);
+	UFUNCTION(BlueprintCallable)
+	void SetBrowserOnOff(bool _Setting);
+	UFUNCTION(BlueprintCallable)
+	bool GetBrowserOnOff();
 
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FString IPAddress = TEXT("127.0.0.1");
@@ -49,9 +53,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	EBtnType UnHoverBtnType;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool CreateRoomUION;	// 이건 좀 아닌것같은뎅..
 
 	const FNetDataRow* TempNetData;
 };

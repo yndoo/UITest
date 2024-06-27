@@ -93,7 +93,8 @@ void UTitleLevelUserWidget::RoomIPDataInit(UDataTable* _IPData, UComboBoxString*
 	for (size_t i = 0; i < IPArr.Num(); ++i)
 	{
 		FNetDataRow* Data = IPArr[i];
-		FString Option = FString::Printf(TEXT("[%s][%s]"), *Data->GetName(), *Data->GetIP());
+		//FString Option = FString::Printf(TEXT("[%s][%s]"), *Data->GetName(), *Data->GetIP());
+		FString Option = FString::Printf(TEXT("%s"), *Data->GetName());
 		_Combo->AddOption(Option);
 	}
 
@@ -111,4 +112,16 @@ void UTitleLevelUserWidget::RoomIPSelectChange(FString _Text)
 	_Text.Split(TEXT("]["), &Name, &IP);
 
 	IPAddress = IP;
+}
+
+void UTitleLevelUserWidget::SetBrowserOnOff(bool _Setting)
+{
+	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
+	Inst->CreateRoomUION = _Setting;
+}
+
+bool UTitleLevelUserWidget::GetBrowserOnOff()
+{
+	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
+	return Inst->CreateRoomUION;
 }

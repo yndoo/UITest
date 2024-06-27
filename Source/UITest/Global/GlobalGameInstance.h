@@ -18,9 +18,17 @@ class UITEST_API UGlobalGameInstance : public UGameInstance
 public:
 	const struct FNetDataRow* GetNetData(FName _Name);
 	FNetDataRow CurNetInfo;
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool CreateRoomUION;	
+
+	//UPROPERTY(/*Replicated, */BlueprintReadWrite)
+	//TArray<FGameRoomInfo> GameRooms;
 private:
 	UGlobalGameInstance();
 
+protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowprivateAccess = "true"));
 	UDataTable* NetDataTable = nullptr;
 };
