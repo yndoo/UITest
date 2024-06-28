@@ -25,3 +25,8 @@ void ATestGameMode::ListenServerOn()
 		Inst->EnableListenServer(true, PortNumber);
 	}
 }
+
+void ATestGameMode::AddRoomListIndex()
+{
+	++RoomListIndex;
+}

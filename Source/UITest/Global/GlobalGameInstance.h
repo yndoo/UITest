@@ -16,7 +16,12 @@ class UITEST_API UGlobalGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public:
-	const struct FNetDataRow* GetNetData(FName _Name);
+	const FNetDataRow* GetNetData(FName _Name);
+
+	UFUNCTION(BlueprintCallable)
+	const FNetDataRow GetNetDataForBP(FName _Name);
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FNetDataRow CurNetInfo;
 
 

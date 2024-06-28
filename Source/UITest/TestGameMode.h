@@ -19,4 +19,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void ListenServerOn();
+
+	UFUNCTION(BlueprintCallable)
+	void AddRoomListIndex();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int RoomListIndex = 0;
 };
