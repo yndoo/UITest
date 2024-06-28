@@ -17,7 +17,13 @@ class UITEST_API UTitleLevelUserWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+
+	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime);
+
+
 public:
+	UFUNCTION(BlueprintImplementableEvent)
+	void TestTick();
 	UFUNCTION(BlueprintCallable, Category = "MyBtnEvent")
 	int MyBtnHover();
 	UFUNCTION(BlueprintCallable, Category = "MyBtnEvent")
@@ -29,6 +35,10 @@ public:
 	void Connect(FString _IP);
 	UFUNCTION(BlueprintCallable)
 	void ServerInitialize(FName _IPName); 
+
+	// ½ÇÇè Áß
+	UFUNCTION(BlueprintCallable)
+	bool IsPortOpen(const FString& _IPAddress, int32 _Port);
 	//virtual bool Initialize() override;
 
 	UFUNCTION(BlueprintCallable)
@@ -44,6 +54,10 @@ public:
 	FString IPAddress = TEXT("127.0.0.1");
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FString Port = TEXT("30002");
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool NeedRefresh = false;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool IsHoverOnOff;

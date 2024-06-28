@@ -5,6 +5,9 @@
 #include "Global/GlobalGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/ComboBoxString.h"
+#include "Sockets.h"
+#include "networking.h"
+
 
 int UTitleLevelUserWidget::MyBtnHover()
 {
@@ -14,6 +17,13 @@ int UTitleLevelUserWidget::MyBtnHover()
 int UTitleLevelUserWidget::MyBtnUnhover()
 {
 	return static_cast<int>(UnHoverBtnType);
+}
+
+void UTitleLevelUserWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	TestTick();
 }
 
 void UTitleLevelUserWidget::ServerStart()
@@ -124,4 +134,37 @@ bool UTitleLevelUserWidget::GetBrowserOnOff()
 {
 	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
 	return Inst->CreateRoomUION;
+}
+
+bool UTitleLevelUserWidget::IsPortOpen(const FString& _IPAddress, int32 _Port)
+{
+	// Create an IPv4 endpoint
+	FIPv4Endpoint Endpoint;
+	bool bIsValid = FIPv4Address::Parse(_IPAddress, Endpoint.Address);
+	if (!bIsValid)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Invalid IP address: %s"), *_IPAddress);
+		return false;
+	}
+	Endpoint.Port = _Port;
+
+	// Create a socket
+	FSocket* Socket = FTcpSocketBuilder(TEXT("MySocket")).AsReusable().BoundToEndpoint(Endpoint);
+
+//	return false;
+	// Try to connect to the socket
+	int bConnected = Socket->Connect(*Endpoint.ToInternetAddr());
+	if (0 != bConnected)
+	{
+		// Connection failed, port is likely closed
+		UE_LOG(LogTemp, Warning, TEXT("Port %d on IP address %s is closed."), _Port, *_IPAddress);
+		return false;
+	}
+
+	// Close socket after checking
+	Socket->Close();
+	ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(Socket);
+
+	UE_LOG(LogTemp, Warning, TEXT("Port %d on IP address %s is open."), _Port, *_IPAddress);
+	return true;
 }
