@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "GameRoomInfo.h"
+
 #include "TestGameMode.generated.h"
 
 /**
@@ -23,6 +25,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AddRoomListIndex();
 
+	UFUNCTION(BlueprintCallable)
+	void PushRoomInfo(FString _title, FString _map);
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int RoomListIndex = 0;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<FGameRoomInfo> RoomInfo;
 };

@@ -19,6 +19,4 @@ public:
 	FString RoomTitle;
 	UPROPERTY(Category = "Parameter", EditAnywhere, BlueprintReadWrite)
 	FString MapName;
-	UPROPERTY(Category = "Parameter", EditAnywhere, BlueprintReadWrite)
-	int Count = 0;
 };

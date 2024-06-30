@@ -151,10 +151,15 @@ bool UTitleLevelUserWidget::IsPortOpen(const FString& _IPAddress, int32 _Port)
 	// Create a socket
 	FSocket* Socket = FTcpSocketBuilder(TEXT("MySocket")).AsReusable().BoundToEndpoint(Endpoint);
 
+	if (nullptr == Socket)
+	{
+		return false;
+	}
+
 //	return false;
 	// Try to connect to the socket
 	int bConnected = Socket->Connect(*Endpoint.ToInternetAddr());
-	if (0 != bConnected)
+	if (0 > bConnected)
 	{
 		// Connection failed, port is likely closed
 		UE_LOG(LogTemp, Warning, TEXT("Port %d on IP address %s is closed."), _Port, *_IPAddress);

@@ -30,3 +30,11 @@ void ATestGameMode::AddRoomListIndex()
 {
 	++RoomListIndex;
 }
+
+void ATestGameMode::PushRoomInfo(FString _title, FString _map)
+{
+	FGameRoomInfo Info;
+	Info.RoomTitle = _title;
+	Info.MapName = _map;
+	RoomInfo.Add(Info);
+}
