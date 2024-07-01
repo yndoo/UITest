@@ -43,3 +43,17 @@ const FNetDataRow UGlobalGameInstance::GetNetDataForBP(FName _Name)
 
 	return *Data;
 }
+
+bool UGlobalGameInstance::IsMyIp(FString _ip)
+{
+	if (true == MyID.IsEmpty())
+	{
+		return false;
+	}
+	const FNetDataRow* data = GetNetData(FName(*MyID));
+	if (_ip == data->GetIP())
+	{
+		return true;
+	}
+	return false;
+}

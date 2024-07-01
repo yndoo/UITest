@@ -31,8 +31,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool NeedRefresh = false;	// 방 리스트 새로고침이 필요한 지
 
-	//UPROPERTY(/*Replicated, */BlueprintReadWrite)
-	//TArray<FGameRoomInfo> GameRooms;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FString MyID;
+
+	UFUNCTION(BlueprintCallable)
+	bool IsMyIp(FString _ip);
 private:
 	UGlobalGameInstance();
 

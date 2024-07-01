@@ -170,6 +170,13 @@ bool UTitleLevelUserWidget::IsPortOpen(const FString& _IPAddress, int32 _Port)
 	Socket->Close();
 	ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->DestroySocket(Socket);
 
+	// Connect되는 IP 중에 '나'는 제외시켜야 함
+	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
+	if (true == Inst->IsMyIp(_IPAddress))
+	{
+		return false;
+	}
+
 	UE_LOG(LogTemp, Warning, TEXT("Port %d on IP address %s is open."), _Port, *_IPAddress);
 	return true;
 }
