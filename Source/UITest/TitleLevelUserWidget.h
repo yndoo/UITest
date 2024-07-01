@@ -49,15 +49,18 @@ public:
 	void SetBrowserOnOff(bool _Setting);
 	UFUNCTION(BlueprintCallable)
 	bool GetBrowserOnOff();
+	
+	// 238472384번째 실험 중
+	UFUNCTION(BlueprintCallable)
+	TArray<bool> RefreshRoomListCPP();
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<FName> RefreshedRoomInfo;
+
 
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FString IPAddress = TEXT("127.0.0.1");
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FString Port = TEXT("30001");
-
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool NeedRefresh = false;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool IsHoverOnOff;

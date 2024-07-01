@@ -24,6 +24,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FNetDataRow CurNetInfo;
 
+	UDataTable* GetNetDataTable()
+	{
+		return NetDataTable;
+	}
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool CreateRoomUION;	

@@ -7,6 +7,7 @@
 #include "Components/ComboBoxString.h"
 #include "Sockets.h"
 #include "networking.h"
+#include "NetDataRow.h"
 
 
 int UTitleLevelUserWidget::MyBtnHover()
@@ -179,4 +180,27 @@ bool UTitleLevelUserWidget::IsPortOpen(const FString& _IPAddress, int32 _Port)
 
 	UE_LOG(LogTemp, Warning, TEXT("Port %d on IP address %s is open."), _Port, *_IPAddress);
 	return true;
+}
+
+TArray<bool> UTitleLevelUserWidget::RefreshRoomListCPP()
+{
+	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
+	UDataTable* table = Inst->GetNetDataTable();
+
+	TArray<FNetDataRow*> arr;
+	TArray<bool> result;
+	RefreshedRoomInfo.Empty();
+	table->GetAllRows<FNetDataRow>(TEXT("GetAllRows"), arr);
+	for (auto row : arr)
+	{
+		row;
+		bool IsExist = IsPortOpen(row->GetIP(), 30001);
+		
+		result.Add(IsExist);
+		RefreshedRoomInfo.Add(FName(row->GetName()));
+
+		int a = 0;
+	}
+
+	return result;
 }
