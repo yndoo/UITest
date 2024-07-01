@@ -53,7 +53,7 @@ public:
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	FString IPAddress = TEXT("127.0.0.1");
 	UPROPERTY(Category = "Contents", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	FString Port = TEXT("30002");
+	FString Port = TEXT("30001");
 
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
