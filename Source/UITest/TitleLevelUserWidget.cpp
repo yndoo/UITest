@@ -150,7 +150,14 @@ bool UTitleLevelUserWidget::IsPortOpen(const FString& _IPAddress, int32 _Port)
 	Endpoint.Port = _Port;
 
 	// Create a socket
-	FSocket* Socket = FTcpSocketBuilder(TEXT("MySocket")).AsReusable().BoundToEndpoint(Endpoint);
+	FSocket* Socket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(TEXT("Stream"), TEXT("Client Socket"));
+	
+	//쌤 추천 새로운 방법 
+	//얘를 UDP 소켓으로 만든다
+	//얘로 UDP Broadcast를 한다
+	//UDP Broadcast를 받는다
+	// 
+	//FSocket* Socket = FTcpSocketBuilder(TEXT("MySocket")).AsReusable().BoundToEndpoint(Endpoint);
 
 	if (nullptr == Socket)
 	{
@@ -159,8 +166,8 @@ bool UTitleLevelUserWidget::IsPortOpen(const FString& _IPAddress, int32 _Port)
 
 //	return false;
 	// Try to connect to the socket
-	int bConnected = Socket->Connect(*Endpoint.ToInternetAddr());
-	if (0 > bConnected)
+	bool bConnected = Socket->Connect(*Endpoint.ToInternetAddr());
+	if (false == bConnected)
 	{
 		// Connection failed, port is likely closed
 		UE_LOG(LogTemp, Warning, TEXT("Port %d on IP address %s is closed."), _Port, *_IPAddress);
